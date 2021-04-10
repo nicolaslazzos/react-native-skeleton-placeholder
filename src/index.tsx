@@ -36,6 +36,7 @@ export const SkeletonContainer: React.FunctionComponent<SkeletonContainerProps> 
   const { children, backgroundColor, speed, highlightColor } = props;
 
   const SCREEN_WIDTH = useWindowDimensions().width;
+  const SCREEN_HEIGHT = useWindowDimensions().height;
 
   const [context, setContext] = React.useState({ backgroundColor });
   const [layout, setLayout] = React.useState<LayoutRectangle>();
@@ -92,10 +93,13 @@ export const SkeletonContainer: React.FunctionComponent<SkeletonContainerProps> 
     <SkeletonContext.Provider value={context}>
       <View onLayout={onLayout}>
         {layout?.width && layout?.height ? (
-          <MaskedView style={{ height: layout.height, width: layout.width }} maskElement={<View>{children}</View>}>
+          <MaskedView
+            style={{ maxHeight: SCREEN_HEIGHT, height: layout.height, width: layout.width }}
+            maskElement={<View>{children}</View>}
+          >
             <View style={{ flexGrow: 1, backgroundColor }} />
             <Animated.View style={[{ flexDirection: "row" }, absoluteTranslateStyle]}>
-              {Array.from({ length: layout?.width }).map((_, index) => {
+              {Array.from({ length: layout.width }).map((_, index) => {
                 const opacity = new Animated.Value(index);
                 return (
                   <Animated.View
@@ -104,7 +108,7 @@ export const SkeletonContainer: React.FunctionComponent<SkeletonContainerProps> 
                       width: 1,
                       backgroundColor: highlightColor,
                       opacity: opacity.interpolate({
-                        inputRange: [0, layout?.width / 2, layout?.width],
+                        inputRange: [0, layout.width / 2, layout.width],
                         outputRange: [0, 1, 0]
                       })
                     }}
