@@ -3,6 +3,10 @@
 SkeletonPlaceholder is a React Native library to easily create an amazing loading effect with FlexBox.<br/>
 Android and iOS
 
+## Changes
+
+I (nicolaslazzos) improved this library so you can pass custom components as children. See the example.
+
 ![](https://i.imgur.com/3aDeSTZ.gif)
 
 ### Installation
@@ -54,62 +58,60 @@ npm install react-native-skeleton-placeholder --save
 
 ### Usage
 
-There are two ways to use this package:
-
-with **SkeletonPlacehoder.Item** 🆕
-
 ```javascript
 import React from "react";
 import { View } from "react-native";
-import SkeletonPlaceholder from "react-native-skeleton-placeholder";
+import { SkeletonContainer, Skeleton } from "react-native-skeleton-placeholder";
 
 const App = () => {
   return (
-    <SkeletonPlaceholder>
-      <SkeletonPlaceholder.Item flexDirection="row" alignItems="center">
-        <SkeletonPlaceholder.Item width={60} height={60} borderRadius={50} />
-        <SkeletonPlaceholder.Item marginLeft={20}>
-          <SkeletonPlaceholder.Item width={120} height={20} borderRadius={4} />
-          <SkeletonPlaceholder.Item
-            marginTop={6}
-            width={80}
-            height={20}
-            borderRadius={4}
-          />
-        </SkeletonPlaceholder.Item>
-      </SkeletonPlaceholder.Item>
-    </SkeletonPlaceholder>
+    <SkeletonContainer>
+      <View style={{ flexDirection: "row", alignContent: "center", padding: 16 }}>
+        <Skeleton style={{ height: 70, width: 70, borderRadius: 6 }} />
+        <View style={{ flex: 1, justifyContent: "center", marginLeft: 16 }}>
+          <Skeleton style={{ height: 16, width: "50%", borderRadius: 6, marginBottom: 10 }} />
+          <Skeleton style={{ height: 16, width: "30%", borderRadius: 6, marginBottom: 10 }} />
+          <Skeleton style={{ height: 16, width: "70%", borderRadius: 6 }} />
+        </View>
+      </View>
+    </SkeletonContainer>
   );
 };
 ```
 
-or with **View**
+Also you can do things like this, that wasn't possible with the original library.
 
 ```javascript
 import React from "react";
 import { View } from "react-native";
-import SkeletonPlaceholder from "react-native-skeleton-placeholder";
+import { SkeletonContainer, Skeleton } from "react-native-skeleton-placeholder";
 
 const App = () => {
   return (
-    <SkeletonPlaceholder>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <View style={{ width: 60, height: 60, borderRadius: 50 }} />
-        <View style={{ marginLeft: 20 }}>
-          <View style={{ width: 120, height: 20, borderRadius: 4 }} />
-          <View
-            style={{ marginTop: 6, width: 80, height: 20, borderRadius: 4 }}
-          />
-        </View>
+    <SkeletonContainer>
+      <ListItem />
+      <ListItem />
+    </SkeletonContainer>
+  );
+};
+
+const ListItem = () => {
+  return (
+    <View style={{ flexDirection: "row", alignContent: "center", padding: 16 }}>
+      <Skeleton style={{ height: 70, width: 70, borderRadius: 6 }} />
+      <View style={{ flex: 1, justifyContent: "center", marginLeft: 16 }}>
+        <Skeleton style={{ height: 16, width: "50%", borderRadius: 6, marginBottom: 10 }} />
+        <Skeleton style={{ height: 16, width: "30%", borderRadius: 6, marginBottom: 10 }} />
+        <Skeleton style={{ height: 16, width: "70%", borderRadius: 6 }} />
       </View>
-    </SkeletonPlaceholder>
+    </View>
   );
 };
 ```
 
 ### Properties
 
-#### SkeletonPlaceholder
+#### SkeletonContainer
 
 |      Prop       |                  Description                   |  Type  |  Default  |
 | :-------------: | :--------------------------------------------: | :----: | :-------: |
@@ -117,11 +119,11 @@ const App = () => {
 | highlightColor  | Determines the highlight color of placeholder  | string | _#F2F8FC_ |
 |      speed      | Determines the animation speed in milliseconds | number |   _800_   |
 
-#### SkeletonPlaceholder.Item
+#### Skeleton
 
-| Prop |            Description            | Type | Default |
-| :--: | :-------------------------------: | :--: | :-----: |
-| any  | Any view style props was accepted | any  |
+| Prop |         Description         | Type | Default |
+| :--: | :-------------------------: | :--: | :-----: |
+| any  | Any view props was accepted | any  |
 
 ### Contributing
 
