@@ -5,7 +5,7 @@ Android and iOS
 
 ## Changes
 
-I (nicolaslazzos) improved this library so you can pass custom components as children. See the example.
+I (nicolaslazzos) improved this library so you can pass custom components as children and also the skeletons adapts to layout changes, including screen rotation. See the example in the Usage section.
 
 ![](https://i.imgur.com/3aDeSTZ.gif)
 
@@ -47,13 +47,13 @@ pod install
 Using yarn:
 
 ```bash
-yarn add react-native-skeleton-placeholder
+yarn add nicolaslazzos/react-native-skeleton-placeholder
 ```
 
 Using npm:
 
 ```bash
-npm install react-native-skeleton-placeholder --save
+npm install git+https://github.com/nicolaslazzos/react-native-skeleton-placeholder --save
 ```
 
 ### Usage
